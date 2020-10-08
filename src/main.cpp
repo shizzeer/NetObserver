@@ -12,6 +12,11 @@ int main()
 {
 	try {
 		Sniffer sniffer;
+		if (!sniffer.setNetworkingInterface()) {
+			std::cerr << "Error with setting sniffer's networking \
+						  interface\n";
+			return -2;
+		}
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << "\r\n";
