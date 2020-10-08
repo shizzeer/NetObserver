@@ -35,7 +35,7 @@ bool Sniffer::setNetworkingInterface()
 	netInterface.sin_port = RANDOM_OS_PORT;
 	errorCode = InetPton(AF_INET, LOCAL_IP, &netInterface.sin_addr.s_addr);
 	if (errorCode < 0) {
-		std::cerr << "Fail while IP address initalization\n";
+		std::cerr << "Fail while IP address initialization\n";
 		return false;
 	}
 	return true;
