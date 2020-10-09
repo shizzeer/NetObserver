@@ -23,7 +23,7 @@ Sniffer::Sniffer()
 	snifferSock = socket(AF_INET, SOCK_RAW, IPPROTO_IP);
 	if (snifferSock == INVALID_SOCKET) {
 		WSACleanup();
-		std::cerr << WSAGetLastError();
+		std::cerr << "Error code: " << WSAGetLastError();
 		throw std::exception("Exception: Failed while creating socket.");
 	}
 }
@@ -35,18 +35,26 @@ bool Sniffer::setNetworkingInterface()
 	netInterface.sin_port = RANDOM_OS_PORT;
 	errorCode = InetPton(AF_INET, LOCAL_IP, &netInterface.sin_addr.s_addr);
 	if (errorCode < 0) {
-		std::cerr << "Fail while IP address initialization\n";
+		std::cerr << "Fail while IP address initialization\r\n";
+		std::cerr << "Error code: " << WSAGetLastError();
 		return false;
 	}
 	return true;
 }
 
-void Sniffer::bindSocket(SOCKET snifferSock)
+bool Sniffer::bindSnifferSocket()
 {
-	/* First thing to do */
+	int bindingErrorCode = 0;
+	bindingErrorCode = bind(snifferSock, reinterpret_cast<const sockaddr*>(&netInterface),
+		sizeof(netInterface));
+	if (bindingErrorCode == SOCKET_ERROR) {
+		std::cerr << "Error code: " << WSAGetLastError();
+		return false;
+	}
+	return true;
 }
 
-void Sniffer::setSniffingMode(SOCKET snifferSock)
+void Sniffer::setSniffingMode()
 {
 	/* Second thing to do */
 }
