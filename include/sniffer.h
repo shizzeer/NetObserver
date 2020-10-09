@@ -11,8 +11,8 @@ public:
 	konstruktor, a on ma nie definiowac swojego. */
 	Sniffer();
 	bool setNetworkingInterface();
-	void bindSocket(SOCKET snifferSock);
-	void setSniffingMode(SOCKET snifferSock);
+	bool bindSnifferSocket();
+	void setSniffingMode();
 	~Sniffer();
 private:
 	WSAData wsaData;
