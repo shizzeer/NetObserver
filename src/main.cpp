@@ -14,8 +14,12 @@ int main()
 		Sniffer sniffer;
 		if (!sniffer.setNetworkingInterface()) {
 			std::cerr << "Error with setting sniffer's networking \
-						  interface\n";
+						  interface\r\n";
 			return -2;
+		}
+		if (!sniffer.bindSnifferSocket()) {
+			std::cerr << "Fail with binding sniffer\'s socket\r\n";
+			return -3;
 		}
 	}
 	catch (const std::exception& e) {
