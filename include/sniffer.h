@@ -7,8 +7,6 @@
 class Sniffer
 {
 public:
-	/* deklaracja defaultowego konstruktora. Mowimy kompilatorowi, ze bedziemy tworzyc wlasny
-	konstruktor, a on ma nie definiowac swojego. */
 	Sniffer();
 	bool setNetworkingInterface();
 	bool bindSnifferSocket();
